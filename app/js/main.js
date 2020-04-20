@@ -46,6 +46,13 @@ function showImage(responseAsBlob){
 function responseAsBlob(response) {
   return response.blob()
 }
+function responseAsText(response){
+  return response.text()
+}
+function showText(responseAsText){
+  const container = document.getElementById('message')
+  container.textContent = responseAsText;
+}
 // Fetch JSON ----------
 
 function fetchJSON() {
@@ -76,6 +83,11 @@ imgButton.addEventListener('click', fetchImage);
 // Fetch text ----------
 
 function fetchText() {
+  fetch('/examples/words.txt')
+    .then(validateResponse)
+    .then(responseAsText)
+    .then(showText)
+    .catch(logError)
   // TODO
 }
 const textButton = document.getElementById('text-btn');
