@@ -98,6 +98,13 @@ textButton.addEventListener('click', fetchText);
 
 function headRequest() {
   // TODO
+  fetch('/examples/words.txt', {
+    method:'head'
+  }).then(validateResponse)
+  .then(responseAsText)
+  .then(logResult)
+  .catch(logError)
+   
 }
 const headButton = document.getElementById('head-btn');
 headButton.addEventListener('click', headRequest);
@@ -108,6 +115,16 @@ headButton.addEventListener('click', headRequest);
 /* NOTE: Never send unencrypted user credentials in production! */
 function postRequest() {
   // TODO
+  var myHeaders = new Headers({
+    'Content-Type':'text/plain'
+  })
+  const data = new FormData(document.getElementById('msg-form'))
+  fetch('http://localhost:5000/', 
+    {method:'post', body:data,headers:myHeaders})
+  .then(validateResponse)
+  .then(responseAsText)
+  .then(logResult)
+  .catch(logError)
 }
 const postButton = document.getElementById('post-btn');
 postButton.addEventListener('click', postRequest);
